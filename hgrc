@@ -1,0 +1,6 @@
+[ui]
+username = David Zuwenden <dhain@zognot.org>
+
+[extensions]
+hgext.bookmarks = 
+hggit = 

@@ -1,0 +1,18 @@
+[submodule "vim/bundle/makegreen"]
+	path = vim/bundle/makegreen
+	url = https://github.com/reinh/vim-makegreen
+[submodule "vim/bundle/repeat"]
+	path = vim/bundle/repeat
+	url = https://github.com/tpope/vim-repeat.git
+[submodule "vim/bundle/command-t"]
+	path = vim/bundle/command-t
+	url = https://github.com/wincent/Command-T.git
+[submodule "vim/pycomplexity"]
+	path = vim/pycomplexity
+	url = https://github.com/garybernhardt/pycomplexity.git
+[submodule "vim/bundle/vim-arduino"]
+	path = vim/bundle/vim-arduino
+	url = https://github.com/tclem/vim-arduino.git
+[submodule "vim/bundle/jshint.vim"]
+	path = vim/bundle/jshint.vim
+	url = https://github.com/dhain/jshint.vim.git
