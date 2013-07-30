@@ -16,3 +16,6 @@
 [submodule "vim/bundle/jshint.vim"]
 	path = vim/bundle/jshint.vim
 	url = https://github.com/dhain/jshint.vim.git
+[submodule "vim/bundle/nginx.vim"]
+	path = vim/bundle/nginx.vim
+	url = https://github.com/vim-scripts/nginx.vim.git
