@@ -17,7 +17,7 @@ set ignorecase
 set smartcase
 
 " tab and backspace
-set wildignore=.git,env,*.pyc,*.egg-info,_build,node_modules
+set wildignore=.git,env,*.pyc,*.egg-info,_build,node_modules,pyenv
 set wildmenu    " make tab completion work like bash
 set backspace=indent,eol,start
 set autoindent
