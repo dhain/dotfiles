@@ -24,7 +24,7 @@ set autoindent
 set expandtab
 set tabstop=4
 set shiftwidth=4
-set softtabstop=4
+set softtabstop=-1
 
 " Remap the tab key to do autocompletion or indentation depending on the
 " context (from http://www.vim.org/tips/tip.php?tip_id=102)
@@ -194,27 +194,29 @@ if has("autocmd")
     augroup js_autocmd
         autocmd!
         autocmd FileType javascript setlocal autoindent
-        autocmd FileType javascript setlocal formatoptions=tcql
-        autocmd FileType javascript setlocal textwidth=78 shiftwidth=2
-        autocmd FileType javascript setlocal softtabstop=2 tabstop=8
-        autocmd FileType javascript setlocal expandtab
+        autocmd FileType javascript setlocal formatoptions+=l
+        autocmd FileType javascript setlocal textwidth=78
+        autocmd FileType javascript setlocal shiftwidth=2
     augroup END
 
     augroup json_autocmd
         autocmd!
         autocmd FileType json setlocal autoindent
-        autocmd FileType json setlocal formatoptions=tcq2l
-        autocmd FileType json setlocal textwidth=78 shiftwidth=2
-        autocmd FileType json setlocal softtabstop=2 tabstop=8
-        autocmd FileType json setlocal expandtab
+        autocmd FileType json setlocal formatoptions+=l
+        autocmd FileType json setlocal textwidth=78
+        autocmd FileType json setlocal shiftwidth=2
     augroup END
 
     augroup cucumber_autocmd
         autocmd!
         autocmd FileType cucumber setlocal autoindent
-        autocmd FileType cucumber setlocal textwidth=78 shiftwidth=2
-        autocmd FileType cucumber setlocal softtabstop=2 tabstop=8
-        autocmd FileType cucumber setlocal expandtab
+        autocmd FileType cucumber setlocal textwidth=78
+        autocmd FileType cucumber setlocal shiftwidth=2
+    augroup END
+
+    augroup yaml_autocmd
+        autocmd!
+        autocmd FileType yaml setlocal shiftwidth=2
     augroup END
 endif
 
