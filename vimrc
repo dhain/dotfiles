@@ -159,6 +159,9 @@ endif
 " Make <leader>' switch between ' and "
 nnoremap <leader>' ""yls<c-r>={'"': "'", "'": '"'}[@"]<cr><esc>
 
+" edit file named under cursor (possibly nonexistent)
+nnoremap <leader>cf :e %:h/<cfile><cr>
+
 command! W :w
 command! Wq :wq
 command! Wqa :wqa
