@@ -58,6 +58,7 @@ set winheight=25
 set winminheight=10
 
 set number              " turn on line numbering
+set relativenumber
 set list                " show invisibles
 MapToggle <f2> number
 MapToggle <f4> list
