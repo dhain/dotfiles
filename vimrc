@@ -61,6 +61,7 @@ set number              " turn on line numbering
 set relativenumber
 set list                " show invisibles
 MapToggle <f2> number
+MapToggle <f3> relativenumber
 MapToggle <f4> list
 
 
