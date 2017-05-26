@@ -24,7 +24,9 @@ set autoindent
 set expandtab
 set tabstop=4
 set shiftwidth=4
-set softtabstop=-1
+if v:version >= 704
+    set softtabstop=-1
+endif
 
 " Remap the tab key to do autocompletion or indentation depending on the
 " context (from http://www.vim.org/tips/tip.php?tip_id=102)
