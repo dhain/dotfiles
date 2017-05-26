@@ -26,6 +26,8 @@ set tabstop=4
 set shiftwidth=4
 if v:version >= 704
     set softtabstop=-1
+else
+    set softtabstop=4
 endif
 
 " Remap the tab key to do autocompletion or indentation depending on the
