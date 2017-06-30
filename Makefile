@@ -1,4 +1,4 @@
-DOTFILES = ctags gitconfig githelpers hgrc irssi jshintrc screenrc vim vimrc ssh/config
+DOTFILES = ctags gitconfig githelpers screenrc vim vimrc
 DOTFILE_DEST := $(DOTFILES:%=~/.%)
 
 DOTDIRS := $(filter-out ./,$(dir $(DOTFILES)))
@@ -6,7 +6,7 @@ DOTDIR_DEST := $(DOTDIRS:%=~/.%)
 
 UNAME := $(shell uname -s)
 
-COMMAND_T_DIR := $(wildcard ~/.vim/bundle/command-t)
+COMMAND_T_DIR := vim/bundle/command-t
 ifeq ($(UNAME),Darwin)
 RAKE := /usr/local/bin/rake
 COMMAND_T_LIB := $(COMMAND_T_DIR)/ruby/command-t/ext.bundle
@@ -36,8 +36,14 @@ $(COMMAND_T_LIB): $(RAKE)
 $(RAKE):
 ifeq ($UNAME),Darwin)
 	brew install ruby
-else
-	apt-get install build-essential ruby ruby-dev rake
+endif
+ifeq ($UNAME),Linux)
+	CODENAME := $(shell lsb_release -a 2>/dev/null | awk '/Codename/ { print $$2 }')
+	ifeq ($CODENAME),precise)
+		apt-get install build-essential ruby ruby-dev rake
+	else
+		apt install build-essential ruby2.3 ruby2.3-dev rake
+	endif
 endif
 
 clean:
