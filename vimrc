@@ -240,3 +240,7 @@ let g:syntastic_python_checkers=['flake8']
 
 " markdown options
 let g:vim_markdown_folding_disabled = 1
+
+
+" jsonnet options
+let g:jsonnet_fmt_options = ' -i -n 2 '
