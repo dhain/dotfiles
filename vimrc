@@ -243,4 +243,4 @@ let g:vim_markdown_folding_disabled = 1
 
 
 " jsonnet options
-let g:jsonnet_fmt_options = ' -i -n 2 '
+let g:jsonnet_fmt_options = ' -i -n 2 --string-style d --comment-style h --no-sort-imports '
