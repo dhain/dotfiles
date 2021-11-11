@@ -8,7 +8,7 @@ UNAME := $(shell uname -s)
 
 COMMAND_T_DIR := vim/bundle/command-t
 ifeq ($(UNAME),Darwin)
-RAKE := /usr/local/bin/rake
+RAKE := /usr/local/opt/ruby/bin/rake
 COMMAND_T_LIB := $(COMMAND_T_DIR)/ruby/command-t/ext.bundle
 else
 RAKE := /usr/bin/rake
@@ -31,7 +31,7 @@ $(DOTFILE_DEST): $(wildcard ~/).%: %
 commandt: $(COMMAND_T_LIB)
 
 $(COMMAND_T_LIB): $(RAKE)
-	cd $(COMMAND_T_DIR) && rake make
+	cd $(COMMAND_T_DIR) && $(RAKE) make
 
 $(RAKE):
 ifeq ($UNAME),Darwin)
