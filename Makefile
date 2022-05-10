@@ -1,4 +1,4 @@
-DOTFILES = ctags gitconfig githelpers screenrc vim vimrc tmux.conf
+DOTFILES = ctags gitconfig githelpers screenrc vim vimrc tmux.conf zshrc zshenv
 DOTFILE_DEST := $(DOTFILES:%=~/.%)
 
 DOTDIRS := $(filter-out ./,$(dir $(DOTFILES)))
