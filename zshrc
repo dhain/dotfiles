@@ -102,3 +102,7 @@ source $ZSH/oh-my-zsh.sh
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+
+precmd() {
+    eval "$(tmux showenv -s 2>/dev/null)"
+}
