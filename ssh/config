@@ -1,21 +1,6 @@
 ControlMaster auto
-ControlPath /Users/dhain/.ssh/ssh_mux_%h_%p_%r
-GSSAPIAuthentication no
+ControlPath ~/.ssh/mux_%C
+ControlPersist 300
+ForwardAgent yes
 HashKnownHosts yes
-
-host *
-    ServerAliveInterval 60
-    Cipher blowfish
-    Protocol 2
-    ForwardAgent yes
-
-host rhi
-    User dhain
-    Hostname rhi.spideroak.com
-    Compression yes
-
-host zognot.org
-    User dhain
-
-host *.zognot.org
-    ProxyCommand ssh zognot.org netcat -q 600 %h %p 2> /dev/null
+ServerAliveInterval 60
