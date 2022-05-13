@@ -105,6 +105,7 @@ if [ -e /usr/local/bin/pyenv ]; then
     eval "$(pyenv virtualenv-init -)"
 fi
 
+# Update environment from tmux client before every command
 precmd() {
     eval "$(tmux showenv -s 2>/dev/null)"
 }

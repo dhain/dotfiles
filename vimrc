@@ -8,6 +8,7 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set hidden      " switch buffers without saving
 set switchbuf=useopen,usetab
+set mouse=a
 
 runtime macros/matchit.vim
 
