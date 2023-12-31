@@ -100,11 +100,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-if [ -e /usr/local/bin/pyenv ]; then
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
-fi
-
 # Update environment from tmux client before every command
 precmd() {
     eval "$(tmux showenv -s 2>/dev/null)"
