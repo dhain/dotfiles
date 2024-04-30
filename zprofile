@@ -1,3 +1,6 @@
+if [ -e /opt/homebrew/bin ]; then
+    export PATH="/opt/homebrew/bin:$PATH"
+fi
 if [ -e /usr/local/cuda ]; then
     export PATH="/usr/local/cuda/bin:$PATH"
 fi

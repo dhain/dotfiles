@@ -1,4 +1,4 @@
-DOTFILES = ctags gitconfig githelpers screenrc vim vimrc tmux.conf zshrc zshenv
+DOTFILES = ctags gitconfig githelpers screenrc vim vimrc tmux.conf zshrc zprofile
 DOTFILE_DEST := $(DOTFILES:%=~/.%)
 
 DOTDIRS := $(filter-out ./,$(dir $(DOTFILES)))
@@ -8,7 +8,7 @@ UNAME := $(shell uname -s)
 
 COMMAND_T_DIR := vim/bundle/command-t
 ifeq ($(UNAME),Darwin)
-RAKE := /usr/local/opt/ruby/bin/rake
+RAKE := /opt/homebrew/opt/ruby/bin/rake
 COMMAND_T_LIB := $(COMMAND_T_DIR)/ruby/command-t/ext.bundle
 else
 RAKE := /usr/bin/rake
