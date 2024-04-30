@@ -1,5 +1,6 @@
-if [ -e /opt/homebrew/bin ]; then
-    export PATH="/opt/homebrew/bin:$PATH"
+brew="$(brew --prefix 2>/dev/null || true)"
+if [ "$brew" ]; then
+    export PATH="$brew/bin:$brew/sbin:$PATH"
 fi
 if [ -e /usr/local/cuda ]; then
     export PATH="/usr/local/cuda/bin:$PATH"
