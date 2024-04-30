@@ -8,7 +8,7 @@ UNAME := $(shell uname -s)
 
 COMMAND_T_DIR := vim/bundle/command-t
 ifeq ($(UNAME),Darwin)
-RAKE := /opt/homebrew/opt/ruby/bin/rake
+RAKE := $(shell brew --prefix)/opt/ruby/bin/rake
 COMMAND_T_LIB := $(COMMAND_T_DIR)/ruby/command-t/ext.bundle
 else
 RAKE := /usr/bin/rake
