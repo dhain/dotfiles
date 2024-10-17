@@ -1,0 +1,25 @@
+[user]
+    name = Sadie Hain
+    email = sadie@zognot.org
+[diff]
+[color]
+    ui = auto
+[merge]
+    tool = vimdiff3
+    defaultToUpstream = 1
+[mergetool "vimdiff3"]
+    cmd = vim -c \"wincmd J\" -f -d \"$MERGED\" \"$LOCAL\" \"$REMOTE\"
+[alias]
+    st = status
+    aa = add --all
+    ci = commit
+    co = checkout
+    di = diff
+    dc = diff --cached
+    amend = commit --amend
+    l = "!. ~/.githelpers && pretty_git_log"
+    la = !git l --all
+    r = !git l -30
+    ra = !git r --all
+[push]
+    default = simple
