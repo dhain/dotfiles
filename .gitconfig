@@ -23,3 +23,5 @@
     ra = !git r --all
 [push]
     default = simple
+[init]
+    defaultBranch = main
