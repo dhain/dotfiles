@@ -1,4 +1,5 @@
 return {
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
     { "wincent/command-t", main = "wincent.commandt", opts = {} },
     { "nvim-treesitter/nvim-treesitter", build= ":TSUpdate", opts = {
 	ensure_installed = {
