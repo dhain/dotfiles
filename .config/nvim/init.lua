@@ -1,6 +1,3 @@
-vim.g.CommandTPreferredImplementation = 'lua'
-require("config.lazy")
-
 vim.opt.backupdir = { '~/.vim-tmp', '~/.tmp', '~/tmp', '/var/tmp', '/tmp' }
 vim.opt.directory = { '~/.vim-tmp', '~/.tmp', '~/tmp', '/var/tmp', '/tmp' }
 
@@ -41,3 +38,8 @@ vim.keymap.set('v', '<leader>y', '"*y')
 
 vim.api.nvim_create_autocmd("BufLeave", { pattern = "*", command = "let b:winview = winsaveview()" })
 vim.api.nvim_create_autocmd("BufEnter", { pattern = "*", command = "if(exists('b:winview')) | call winrestview(b:winview) | endif" })
+
+vim.g.CommandTPreferredImplementation = 'lua'
+require("config.lazy")
+
+vim.cmd.colorscheme('catppuccin')
