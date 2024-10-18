@@ -1,7 +1,7 @@
 return {
     { "catppuccin/nvim", name = "catppuccin", priority = 1000, opts = {
         transparent_background = true,
-        integrations = { treesitter = true }
+        integrations = { treesitter = true },
     } },
     { "wincent/command-t", main = "wincent.commandt", opts = {} },
     { "nvim-treesitter/nvim-treesitter", build= ":TSUpdate", opts = {
