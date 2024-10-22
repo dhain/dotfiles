@@ -1,19 +1,14 @@
 Dotfiles
 ========
 
-Use GNU stow to install:
+Packages to install:
 
-```
-brew install stow
-```
-
-or
-
-```
-sudo apt install stow
-```
-
-then
+- stow
+- zsh
+- ohmyzsh
+- tmux
+- neovim
+- xclip (linux)
 
 ```
 cd dotfiles
