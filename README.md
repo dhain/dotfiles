@@ -15,3 +15,5 @@ Packages to install:
 cd dotfiles
 stow -vv .
 ```
+
+To make the rclone unit work, uncomment `user_allow_other` in `/etc/fuse.conf`.
