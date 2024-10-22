@@ -9,6 +9,7 @@ Packages to install:
 - tmux
 - neovim
 - xclip (linux)
+- rclone (linux)
 
 ```
 cd dotfiles
