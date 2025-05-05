@@ -1,0 +1,13 @@
+[Container]
+Image=ghcr.io/speaches-ai/speaches:latest-cuda
+AutoUpdate=registry
+Volume=/nvme/hf-hub-cache:/home/ubuntu/.cache/huggingface/hub
+AddDevice=nvidia.com/gpu=all
+Environment=WHISPER__INFERENCE_DEVICE=cuda
+PublishPort=3001:8000/tcp
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

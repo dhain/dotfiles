@@ -1,0 +1,12 @@
+[Container]
+Image=ghcr.io/open-webui/open-webui:main
+AutoUpdate=registry
+Volume=open-webui:/app/backend/data
+PublishPort=3000:8080/tcp
+PodmanArgs=--add-host host.docker.internal:host-gateway
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
