@@ -16,4 +16,8 @@ cd dotfiles
 stow -vv .
 ```
 
+
+rclone
+------
+
 To make the rclone unit work, uncomment `user_allow_other` in `/etc/fuse.conf`.
