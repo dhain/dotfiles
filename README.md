@@ -8,6 +8,7 @@ Packages to install:
 - ohmyzsh
 - tmux
 - neovim
+- ripgrep
 - xclip (linux)
 - rclone (linux)
 
