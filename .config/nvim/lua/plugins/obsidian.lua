@@ -5,6 +5,15 @@ return {
     "nvim-lua/plenary.nvim",
     "hrsh7th/nvim-cmp",
   },
+  cond = function()
+    local path = ""
+    if vim.loop.os_uname().sysname == "Darwin" then
+      path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Garden"
+    else
+      path = "~/mnt/borf/Library/Mobile Documents/iCloud~md~obsidian/Documents/Garden"
+    end
+    return vim.fn.isdirectory(path)
+  end,
   config = function()
     local path = ""
     if vim.loop.os_uname().sysname == "Darwin" then
