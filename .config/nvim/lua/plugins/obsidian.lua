@@ -12,7 +12,7 @@ return {
     else
       path = "~/mnt/borf/Library/Mobile Documents/iCloud~md~obsidian/Documents/Garden"
     end
-    return vim.fn.isdirectory(path)
+    return vim.fn.isdirectory(path) ~= 0
   end,
   config = function()
     local path = ""
