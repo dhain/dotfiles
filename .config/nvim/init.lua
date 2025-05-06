@@ -1,5 +1,7 @@
-require("config.lazy")
+vim.g.mapleader = ","
+vim.g.maplocalleader = ","
 
+-- vim.opt allows setting lists as lua tables
 vim.opt.backupdir = { '~/.vim-tmp', '~/.tmp', '~/tmp', '/var/tmp', '/tmp' }
 vim.opt.directory = { '~/.vim-tmp', '~/.tmp', '~/tmp', '/var/tmp', '/tmp' }
 
@@ -16,13 +18,12 @@ vim.o.switchbuf = 'useopen,usetab'
 
 vim.o.autoindent = true
 vim.o.expandtab = true
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
-vim.o.softtabstop=-1
+vim.o.tabstop = 2
+vim.o.shiftwidth = 2
+vim.o.softtabstop = 2
 
 vim.o.showcmd = true
 vim.o.scrolloff = 3
-vim.o.cmdheight = 2
 
 vim.o.number = true
 vim.o.relativenumber = true
@@ -39,4 +40,5 @@ vim.keymap.set('v', '<leader>y', '"*y')
 vim.api.nvim_create_autocmd("BufLeave", { pattern = "*", command = "let b:winview = winsaveview()" })
 vim.api.nvim_create_autocmd("BufEnter", { pattern = "*", command = "if(exists('b:winview')) | call winrestview(b:winview) | endif" })
 
-vim.cmd.colorscheme('catppuccin')
+require("lazy-bootstrap")
+require("lazy").setup("plugins")
