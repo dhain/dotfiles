@@ -6,27 +6,15 @@ return {
     "hrsh7th/nvim-cmp",
   },
   cond = function()
-    local path = ""
-    if vim.loop.os_uname().sysname == "Darwin" then
-      path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Garden"
-    else
-      path = "~/mnt/borf/Library/Mobile Documents/iCloud~md~obsidian/Documents/Garden"
-    end
-    return vim.fn.isdirectory(path) ~= 0
+    return vim.env.OBSIDIAN_VAULT
   end,
   config = function()
-    local path = ""
-    if vim.loop.os_uname().sysname == "Darwin" then
-      path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Garden"
-    else
-      path = "~/mnt/borf/Library/Mobile Documents/iCloud~md~obsidian/Documents/Garden"
-    end
     require("obsidian").setup({
       workspaces = {
         {
-          name = "Garden",
-          path = path,
-        },
+          name = vim.env.OBSIDIAN_VAULT_NAME or "Default",
+          path = vim.env.OBSIDIAN_VAULT,
+        }
       },
       templates = {
         folder = "Templates",
