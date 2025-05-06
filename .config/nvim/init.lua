@@ -1,4 +1,3 @@
-vim.g.CommandTPreferredImplementation = 'lua'
 require("config.lazy")
 
 vim.opt.backupdir = { '~/.vim-tmp', '~/.tmp', '~/tmp', '/var/tmp', '/tmp' }
@@ -31,8 +30,6 @@ vim.o.list = true
 vim.o.cursorline = true
 
 vim.keymap.set('n', '<leader><leader>', "<c-^>")
-vim.keymap.set('n', '<leader>t', "<cmd>CommandT<cr>")
-vim.keymap.set('n', '<leader>b', "<cmd>CommandTBuffer<cr>")
 vim.keymap.set('n', '<c-h>', "<c-w>h")
 vim.keymap.set('n', '<c-j>', "<c-w>j")
 vim.keymap.set('n', '<c-k>', "<c-w>k")
