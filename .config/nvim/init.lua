@@ -8,6 +8,7 @@ vim.opt.directory = { '~/.vim-tmp', '~/.tmp', '~/tmp', '/var/tmp', '/tmp' }
 vim.o.history = 1000
 vim.o.hidden = true
 vim.o.mouse = 'a'
+vim.o.conceallevel = 2
 
 vim.o.incsearch = true
 vim.o.ignorecase = true
