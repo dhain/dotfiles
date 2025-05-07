@@ -10,6 +10,8 @@ patches: <patches|join( → )|pre_applied(%{$fg[yellow]%})|post_applied(%{$reset
   fi
 }
 
+ZSH_THEME_TERM_TAB_TITLE_IDLE="%~"
+
 ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[cyan]%}+"
 ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}✱"
 ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}✗"
