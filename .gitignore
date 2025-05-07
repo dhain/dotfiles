@@ -1,2 +1,3 @@
 .config/nvim/lazy-lock.json
 .config/systemd/user/default.target.wants
+.tmux/plugins
