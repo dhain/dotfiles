@@ -5,7 +5,7 @@ fi
 if [ -e "$HOME/.pyenv" ]; then
     export PATH="$HOME/.pyenv/bin:$PATH"
     eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
+    eval "$(pyenv virtualenv-init - | sed s/precmd/precwd/g)"
 fi
 
 if [ -e "$HOME/.nvm" ]; then
