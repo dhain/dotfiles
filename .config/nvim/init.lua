@@ -31,6 +31,7 @@ vim.o.relativenumber = true
 vim.o.list = true
 vim.o.cursorline = true
 
+vim.keymap.set('n', '<cr>', ":nohlsearch<cr>")
 vim.keymap.set('n', '<leader><leader>', "<c-^>")
 vim.keymap.set('n', '<c-h>', "<c-w>h")
 vim.keymap.set('n', '<c-j>', "<c-w>j")

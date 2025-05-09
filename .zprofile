@@ -14,6 +14,10 @@ if [ -e "$HOME/.nvm" ]; then
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
+if [ -e "$HOME/.cargo" ]; then
+  export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
 if [ -e "$HOME/.localzprofile" ]; then
     source "$HOME/.localzprofile"
 fi

@@ -7,7 +7,13 @@ return {
   },
   config = function()
     local ts = require("telescope")
-    ts.setup()
+    ts.setup({
+      pickers = {
+        find_files = {
+          hidden = true
+        }
+      }
+    })
     ts.load_extension("ui-select")
 
     local builtin = require("telescope.builtin")
