@@ -44,3 +44,9 @@ vim.api.nvim_create_autocmd("BufEnter", { pattern = "*", command = "if(exists('b
 
 require("lazy-bootstrap")
 require("lazy").setup("plugins")
+
+local ollama_python = vim.fn.expand('$HOME/.pyenv/versions/ollama/bin/python3')
+if vim.uv.fs_stat(ollama_python) then
+  vim.lsp.config("ollama-ls", { cmd = { ollama_python, "-m", "ollama_ls.cli" } })
+  vim.lsp.enable("ollama-ls")
+end
