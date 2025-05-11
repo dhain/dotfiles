@@ -1,27 +1,11 @@
 Dotfiles
 ========
 
-Packages to install:
-
-- stow
-- zsh
-- ohmyzsh
-- tmux
-- neovim
-- ripgrep
-- xclip (linux)
-- rclone (linux)
+To install:
 
 ```
-cd dotfiles
-stow -vv .
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/dhain/dotfiles/refs/heads/main/bootstrap.sh)"
 ```
-
-
-rclone
-------
-
-To make the rclone unit work, uncomment `user_allow_other` in `/etc/fuse.conf`.
 
 
 Nerd Fonts

@@ -7,7 +7,5 @@ return {
     "MunifTanjim/nui.nvim",
   },
   lazy = false,
-  config = function()
-    vim.keymap.set("n", "<c-n>", ":Neotree<cr>")
-  end
+  opts = {},
 }
