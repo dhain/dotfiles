@@ -52,7 +52,7 @@ bootstrap_linux_pre() {
 
 bootstrap_macos_pre() {
   command_exists brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  BREW_PREFIX="$(brew prefix)"
+  BREW_PREFIX="$(brew --prefix)"
 
   BREW_PKGS=
   command_exists stow || BREW_PKGS="$BREW_PKGS stow"
