@@ -20,6 +20,14 @@ command_exists() {
 }
 
 
+install_latest_nodejs() {
+  TAG="$(curl -fsSL https://api.github.com/repos/nvm-sh/nvm/releases/latest | jq -r '.tag_name')"
+  curl -fsSL "https://raw.githubusercontent.com/nvm-sh/nvm/${TAG}/install.sh" | PROFILE=/dev/null bash
+  . "$HOME/.nvm/nvm.sh"
+  nvm install --lts
+}
+
+
 bootstrap_common() {
   if [ ! -e "dotfiles" ]; then
     git clone --recurse-submodules git@github.com:dhain/dotfiles.git
@@ -29,6 +37,7 @@ bootstrap_common() {
   [ -e ".tmux/plugins" ] || mkdir -p ".tmux/plugins"
   [ -e ".oh-my-zsh" ] || sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
   [ -e ".oh-my-zsh/themes" ] || mkdir ".oh-my-zsh/themes"
+  [ -e ".nvm/nvm.sh" ] || install_latest_nodejs
 }
 
 
@@ -36,6 +45,7 @@ bootstrap_linux_pre() {
   APT_PKGS=
   command_exists make || APT_PKGS="$APT_PKGS build-essential"
   command_exists stow || APT_PKGS="$APT_PKGS stow"
+  command_exists jq || APT_PKGS="$APT_PKGS jq"
   command_exists zsh || APT_PKGS="$APT_PKGS zsh"
   command_exists tmux || APT_PKGS="$APT_PKGS tmux"
   command_exists nvim || APT_PKGS="$APT_PKGS neovim"
@@ -56,6 +66,7 @@ bootstrap_macos_pre() {
 
   BREW_PKGS=
   command_exists stow || BREW_PKGS="$BREW_PKGS stow"
+  command_exists jq || BREW_PKGS="$BREW_PKGS jq"
   [ -e "$BREW_PREFIX/bin/zsh" ] || BREW_PKGS="$BREW_PKGS zsh"
   [ -e "$BREW_PREFIX/bin/tmux" ] || BREW_PKGS="$BREW_PKGS tmux"
   [ -e "$BREW_PREFIX/bin/nvim" ] || BREW_PKGS="$BREW_PKGS neovim"
