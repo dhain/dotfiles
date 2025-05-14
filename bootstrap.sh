@@ -52,6 +52,7 @@ bootstrap_linux_pre() {
   command_exists rg || APT_PKGS="$APT_PKGS ripgrep"
   command_exists xclip || APT_PKGS="$APT_PKGS xclip"
   command_exists rclone || APT_PKGS="$APT_PKGS rclone"
+  command_exists convert || APT_PKGS="$APT_PKGS imagemagick"
   [ -z "$APT_PKGS" ] || sudo apt install -y $APT_PKGS
 
   grep -qE '^user_allow_other' /etc/fuse.conf || sudo sed -i 's/^#\s*user_allow_other/user_allow_other/' /etc/fuse.conf
@@ -71,6 +72,7 @@ bootstrap_macos_pre() {
   [ -e "$BREW_PREFIX/bin/tmux" ] || BREW_PKGS="$BREW_PKGS tmux"
   [ -e "$BREW_PREFIX/bin/nvim" ] || BREW_PKGS="$BREW_PKGS neovim"
   [ -e "$BREW_PREFIX/bin/rg" ] || BREW_PKGS="$BREW_PKGS ripgrep"
+  [ -e "$BREW_PREFIX/bin/convert" ] || BREW_PKGS="$BREW_PKGS imagemagick"
   [ -z "$BREW_PKGS" ] || brew install $BREW_PKGS
 }
 
