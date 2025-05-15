@@ -26,7 +26,7 @@ return {
     "mason-org/mason-lspconfig.nvim",
     lazy = false,
     opts = {
-      ensure_installed = { "ruff", "pyright", "lua_ls" },
+      ensure_installed = { "ruff", "pyright", "lua_ls", "marksman", },
       auto_install = true,
     },
   },
