@@ -8,7 +8,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       client.server_capabilities.hoverProvider = false
     end
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', '<leader>f', function()
       vim.lsp.buf.format({ async = true })
