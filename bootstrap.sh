@@ -28,6 +28,14 @@ install_latest_nodejs() {
 }
 
 
+add_wezterm_apt_repo() {
+  curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /usr/share/keyrings/wezterm-fury.gpg
+  echo 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
+  sudo chmod 644 /usr/share/keyrings/wezterm-fury.gpg
+  sudo apt update
+}
+
+
 bootstrap_common() {
   if [ ! -e "dotfiles" ]; then
     git clone --recurse-submodules git@github.com:dhain/dotfiles.git
@@ -42,6 +50,7 @@ bootstrap_common() {
 
 
 bootstrap_linux_pre() {
+  [ -e "/etc/apt/sources.list.d/wezterm.list" ] || add_wezterm_apt_repo
   APT_PKGS=
   command_exists make || APT_PKGS="$APT_PKGS build-essential"
   command_exists stow || APT_PKGS="$APT_PKGS stow"
@@ -53,6 +62,7 @@ bootstrap_linux_pre() {
   command_exists xclip || APT_PKGS="$APT_PKGS xclip"
   command_exists rclone || APT_PKGS="$APT_PKGS rclone"
   command_exists convert || APT_PKGS="$APT_PKGS imagemagick"
+  command_exists wezterm || APT_PKGS="$APT_PKGS wezterm"
   [ -z "$APT_PKGS" ] || sudo apt install -y $APT_PKGS
 
   grep -qE '^user_allow_other' /etc/fuse.conf || sudo sed -i 's/^#\s*user_allow_other/user_allow_other/' /etc/fuse.conf
@@ -73,13 +83,14 @@ bootstrap_macos_pre() {
   [ -e "$BREW_PREFIX/bin/nvim" ] || BREW_PKGS="$BREW_PKGS neovim"
   [ -e "$BREW_PREFIX/bin/rg" ] || BREW_PKGS="$BREW_PKGS ripgrep"
   [ -e "$BREW_PREFIX/bin/convert" ] || BREW_PKGS="$BREW_PKGS imagemagick"
+  [ -e "/Applications/WezTerm.app" ] || BREW_PKGS="$BREW_PKGS wezterm"
   [ -z "$BREW_PKGS" ] || brew install $BREW_PKGS
 }
 
 
 cd "$HOME"
 
-STOW_PKGS="git bin zsh tmux nvim"
+STOW_PKGS="git bin zsh tmux nvim wezterm"
 if [ "$(uname)" = "Darwin" ]; then
   bootstrap_macos_pre
 else
