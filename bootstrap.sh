@@ -37,12 +37,12 @@ add_wezterm_apt_repo() {
 
 
 install_kitty_macos() {
-  curl -fsSL https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+  curl -fsSL https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n
 }
 
 
 install_kitty_linux() {
-  curl -fsSL https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin dest="$HOME/.local/stow"
+  curl -fsSL https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin dest="$HOME/.local/stow" launch=n
   stow -vv -d "$HOME/.local/stow" -t "$HOME/.local" kitty.app
 }
 
