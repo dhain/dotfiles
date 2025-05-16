@@ -36,7 +36,12 @@ add_wezterm_apt_repo() {
 }
 
 
-install_kitty() {
+install_kitty_macos() {
+  curl -fsSL https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+}
+
+
+install_kitty_linux() {
   curl -fsSL https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin dest="$HOME/.local/stow"
   stow -vv -d "$HOME/.local/stow" -t "$HOME/.local" kitty.app
 }
@@ -53,7 +58,6 @@ bootstrap_common() {
   [ -e ".tmux/plugins" ] || mkdir -p ".tmux/plugins"
   [ -e ".oh-my-zsh" ] || sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
   [ -e ".oh-my-zsh/themes" ] || mkdir ".oh-my-zsh/themes"
-  [ -e ".local/bin/kitty" ] || install_kitty
   [ -e ".nvm/nvm.sh" ] || install_latest_nodejs
 }
 
@@ -80,6 +84,11 @@ bootstrap_linux_pre() {
 }
 
 
+bootstrap_linux_post() {
+  command_exists kitty || install_kitty_linux
+}
+
+
 bootstrap_macos_pre() {
   command_exists brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   BREW_PREFIX="$(brew --prefix)"
@@ -97,6 +106,11 @@ bootstrap_macos_pre() {
 }
 
 
+bootstrap_macos_post() {
+  [ -e "/Applications/kitty.app" ] || install_kitty_macos
+}
+
+
 cd "$HOME"
 
 STOW_PKGS="git bin zsh tmux nvim wezterm"
@@ -108,5 +122,10 @@ else
 fi
 bootstrap_common
 stow -vv -d "$HOME/dotfiles" -t "$HOME" $STOW_PKGS
+if [ "$(uname)" = "Darwin" ]; then
+  bootstrap_macos_post
+else
+  bootstrap_linux_post
+fi
 
 cd -
