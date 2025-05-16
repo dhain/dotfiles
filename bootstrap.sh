@@ -36,15 +36,24 @@ add_wezterm_apt_repo() {
 }
 
 
+install_kitty() {
+  curl -fsSL https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin dest="$HOME/.local/stow"
+  stow -vv -d "$HOME/.local/stow" -t "$HOME/.local" kitty.app
+}
+
+
 bootstrap_common() {
   if [ ! -e "dotfiles" ]; then
     git clone --recurse-submodules git@github.com:dhain/dotfiles.git
   fi
-  [ -e ".local" ] || mkdir ".local"
+  [ -e ".local/bin" ] || mkdir -p ".local/bin"
+  [ -e ".local/share" ] || mkdir -p ".local/share"
+  [ -e ".local/lib" ] || mkdir -p ".local/lib"
   [ -e ".config" ] || mkdir ".config"
   [ -e ".tmux/plugins" ] || mkdir -p ".tmux/plugins"
   [ -e ".oh-my-zsh" ] || sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
   [ -e ".oh-my-zsh/themes" ] || mkdir ".oh-my-zsh/themes"
+  [ -e ".local/bin/kitty" ] || install_kitty
   [ -e ".nvm/nvm.sh" ] || install_latest_nodejs
 }
 
