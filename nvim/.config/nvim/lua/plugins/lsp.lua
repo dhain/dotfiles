@@ -7,7 +7,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
       -- Disable hover in favor of Pyright
       client.server_capabilities.hoverProvider = false
     end
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, opts)
     vim.keymap.set('n', '<leader>f', function()
       vim.lsp.buf.format({ async = true })
@@ -40,7 +39,7 @@ return {
         settings = {
           Lua = {
             diagnostics = {
-              globals = { "vim" },
+              globals = { "vim", "Snacks" },
             }
           }
         }
