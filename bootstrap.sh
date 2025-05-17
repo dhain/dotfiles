@@ -113,7 +113,7 @@ bootstrap_macos_post() {
 
 cd "$HOME"
 
-STOW_PKGS="git bin zsh tmux nvim wezterm"
+STOW_PKGS="git bin zsh tmux nvim wezterm kitty"
 if [ "$(uname)" = "Darwin" ]; then
   bootstrap_macos_pre
 else
