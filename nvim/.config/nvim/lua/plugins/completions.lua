@@ -4,6 +4,7 @@ local trigger_text = ';'
 return {
   {
     "saghen/blink.cmp",
+    version = "1.*",
     dependencies = {
       "moyiz/blink-emoji.nvim",
       { "Kaiser-Yang/blink-cmp-dictionary", dependencies = { "nvim-lua/plenary.nvim" } },
