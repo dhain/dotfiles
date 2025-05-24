@@ -101,6 +101,7 @@ bootstrap_macos_pre() {
   [ -e "$BREW_PREFIX/bin/nvim" ] || BREW_PKGS="$BREW_PKGS neovim"
   [ -e "$BREW_PREFIX/bin/rg" ] || BREW_PKGS="$BREW_PKGS ripgrep"
   [ -e "$BREW_PREFIX/bin/convert" ] || BREW_PKGS="$BREW_PKGS imagemagick"
+  [ -e "$BREW_PREFIX/bin/pngpaste" ] || BREW_PKGS="$BREW_PKGS pngpaste"
   [ -e "/Applications/WezTerm.app" ] || BREW_PKGS="$BREW_PKGS wezterm"
   [ -z "$BREW_PKGS" ] || brew install $BREW_PKGS
 }
