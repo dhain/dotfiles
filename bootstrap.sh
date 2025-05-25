@@ -25,6 +25,7 @@ install_latest_nodejs() {
   curl -fsSL "https://raw.githubusercontent.com/nvm-sh/nvm/${TAG}/install.sh" | PROFILE=/dev/null bash
   . "$HOME/.nvm/nvm.sh"
   nvm install --lts
+  npm install -g corepack
 }
 
 
