@@ -1,7 +1,7 @@
 return {
   "christoomey/vim-tmux-navigator",
   lazy = false,
-  cond = vim.env.TERM == "xterm-tmux",
+  cond = vim.env.TERM:find("tmux") ~= nil,
   cmd = {
     "TmuxNavigateLeft",
     "TmuxNavigateDown",

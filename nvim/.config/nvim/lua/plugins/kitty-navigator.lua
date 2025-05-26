@@ -1,7 +1,7 @@
 return {
   "knubie/vim-kitty-navigator",
   lazy = false,
-  cond = vim.env.TERM == "xterm-kitty",
+  cond = vim.env.TERM:find("kitty") ~= nil,
   build = "cp ./*.py ~/.config/kitty/",
   cmd = {
     "KittyNavigateLeft",
