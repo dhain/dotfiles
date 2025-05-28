@@ -98,6 +98,21 @@ return {
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {
+      pattern = "LazyLoad",
+      callback = function(ev)
+        if ev.data == "snacks.nvim" then
+          local orig_norm = Snacks.image.convert.norm
+          Snacks.image.convert.norm = function(src)
+            local yt_id = src:match("^https?://youtu%.be/([^?]+)") or src:match("^https?://www%.youtube%.com/watch%?.*v=([^&]+)") or src:match("^https?://youtube%.com/watch%?.*v=([^&]+)")
+            if yt_id then
+              src = "https://img.youtube.com/vi/" .. yt_id .. "/0.jpg"
+            end
+            return orig_norm(src)
+          end
+        end
+      end,
+    })
+    vim.api.nvim_create_autocmd("User", {
       pattern = "VeryLazy",
       callback = function()
         -- Setup some globals for debugging (lazy-loaded)
