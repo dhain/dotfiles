@@ -14,6 +14,8 @@ HOME="${HOME:-$(getent passwd $USER 2>/dev/null | cut -d: -f6)}"
 # macOS does not have getent, but this works even if $HOME is unset
 HOME="${HOME:-$(eval echo ~$USER)}"
 
+STOW_PKGS="git bin zsh tmux nvim wezterm kitty"
+
 
 command_exists() {
   command -v "$@" >/dev/null 2>&1
@@ -48,22 +50,9 @@ install_kitty_linux() {
 }
 
 
-bootstrap_common() {
-  if [ ! -e "dotfiles" ]; then
-    git clone --recurse-submodules git@github.com:dhain/dotfiles.git
-  fi
-  [ -e ".local/bin" ] || mkdir -p ".local/bin"
-  [ -e ".local/share" ] || mkdir -p ".local/share"
-  [ -e ".local/lib" ] || mkdir -p ".local/lib"
-  [ -e ".config" ] || mkdir ".config"
-  [ -e ".tmux/plugins" ] || mkdir -p ".tmux/plugins"
-  [ -e ".oh-my-zsh" ] || sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
-  [ -e ".oh-my-zsh/themes" ] || mkdir ".oh-my-zsh/themes"
-  [ -e ".nvm/nvm.sh" ] || install_latest_nodejs
-}
-
-
 bootstrap_linux_pre() {
+  GHOSTTY_DIR="$HOME/.config/ghostty"
+  STOW_PKGS="$STOW_PKGS systemd"
   [ -e "/etc/apt/sources.list.d/wezterm.list" ] || add_wezterm_apt_repo
   APT_PKGS=
   command_exists make || APT_PKGS="$APT_PKGS build-essential"
@@ -85,15 +74,10 @@ bootstrap_linux_pre() {
 }
 
 
-bootstrap_linux_post() {
-  command_exists kitty || install_kitty_linux
-}
-
-
 bootstrap_macos_pre() {
+  GHOSTTY_DIR="$HOME/Library/Application Support/com.mitchellh.ghostty"
   command_exists brew || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   BREW_PREFIX="$(brew --prefix)"
-
   BREW_PKGS=
   command_exists stow || BREW_PKGS="$BREW_PKGS stow"
   command_exists jq || BREW_PKGS="$BREW_PKGS jq"
@@ -108,22 +92,43 @@ bootstrap_macos_pre() {
 }
 
 
+bootstrap_common() {
+  if [ ! -e "dotfiles" ]; then
+    git clone --recurse-submodules git@github.com:dhain/dotfiles.git
+  fi
+  [ -e ".local/bin" ] || mkdir -p ".local/bin"
+  [ -e ".local/share" ] || mkdir -p ".local/share"
+  [ -e ".local/lib" ] || mkdir -p ".local/lib"
+  [ -e ".config" ] || mkdir ".config"
+  [ -e ".tmux/plugins" ] || mkdir -p ".tmux/plugins"
+  [ -e ".oh-my-zsh" ] || sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended --keep-zshrc
+  [ -e ".oh-my-zsh/themes" ] || mkdir ".oh-my-zsh/themes"
+  [ -e ".nvm/nvm.sh" ] || install_latest_nodejs
+  stow -vv -d "$HOME/dotfiles" -t "$HOME" $STOW_PKGS
+  [ -e "$GHOSTTY_DIR" ] || mkdir -p "$GHOSTTY_DIR"
+  stow -vv -d "$HOME/dotfiles" -t "$GHOSTTY_DIR" ghostty
+}
+
+
+bootstrap_linux_post() {
+  command_exists kitty || install_kitty_linux
+}
+
+
 bootstrap_macos_post() {
   [ -e "/Applications/kitty.app" ] || install_kitty_macos
+  stow -vv -d "$HOME/dotfiles" -t "$GHOSTTY_DIR" ghostty-macos
 }
 
 
 cd "$HOME"
 
-STOW_PKGS="git bin zsh tmux nvim wezterm kitty"
 if [ "$(uname)" = "Darwin" ]; then
   bootstrap_macos_pre
 else
   bootstrap_linux_pre
-  STOW_PKGS="$STOW_PKGS systemd"
 fi
 bootstrap_common
-stow -vv -d "$HOME/dotfiles" -t "$HOME" $STOW_PKGS
 if [ "$(uname)" = "Darwin" ]; then
   bootstrap_macos_post
 else
