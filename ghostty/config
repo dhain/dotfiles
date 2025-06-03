@@ -2,6 +2,7 @@ window-decoration=server
 background = black
 background-opacity = 0.8
 background-blur = true
+unfocused-split-opacity = 1
 font-family = "MesloLGL Nerd Font"
 font-size = 10
 theme = catppuccin-mocha
