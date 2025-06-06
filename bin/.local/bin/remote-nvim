@@ -1,0 +1,64 @@
+#!/bin/sh
+
+usage="usage: $(basename "$0") <options> [user@]host NAME
+
+Run nvim remotely. Give it a name to identify the nvim instance. If an instance
+of nvim is already running with the given name, connect to it; otherwise start
+a new instance with the given name.
+
+Options:
+  -h, --help      display this help
+
+  [user@]host     argument passed to ssh
+  NAME            name of instance to connect to (or start)
+"
+
+run_child() {
+  export SOCK="$HOME/.local/nvim-$1.sock"
+  shift
+  if [ -f "$SOCK" ]; then
+    echo "$SOCK"
+    exit 0
+  fi
+  if [ -n "$1" ]; then
+    cd "$1"
+    shift
+  fi
+  (
+    exec >/dev/null
+    exec 2>/dev/null
+    exec 0</dev/null
+    nvim --listen "$SOCK" --headless --cmd "lua vim.uv.fs_write(3, vim.env.SOCK)" --cmd "lua vim.uv.fs_close(3)" "$@"
+  ) </dev/null >/dev/null 2>/dev/null &
+  exit 0
+}
+
+while :; do
+  case $1 in
+    -h|--help)
+      printf "%s\n" "$usage" >&2
+      exit 1
+      ;;
+    --)
+      shift
+      break
+      ;;
+    child)
+      shift
+      run_child "$@" 3>&1 &
+      exit 0
+      ;;
+    *)
+      break
+  esac
+  shift
+done
+
+TARGET="$1"
+NAME="$2"
+shift 2
+
+SOCK="$HOME/.local/nvim-$NAME.sock"
+RSOCK=$(ssh "$TARGET" 'exec $SHELL -l' .local/bin/remote-nvim child "$NAME" "$@")
+ssh -o StreamLocalBindUnlink=yes -o ExitOnForwardFailure=yes -f -L "$SOCK":"$RSOCK" "$TARGET" sleep 1
+nvim --server "$SOCK" --remote-ui
